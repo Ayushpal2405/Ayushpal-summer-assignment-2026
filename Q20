@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    long long num, maxPrime = -1;
+
+    printf("Enter an integer: ");
+    scanf("%lld", &num);
+
+    // Keep dividing out 2s to clear all even sub-factors
+    while (num % 2 == 0) {
+        maxPrime = 2;
+        num /= 2;
+    }
+
+    // Check odd factors up to the square root of the remaining value
+    for (int i = 3; i * i <= num; i += 2) {
+        while (num % i == 0) {
+            maxPrime = i;
+            num /= i;
+        }
+    }
+
+    // If the remaining number is still prime and greater than 2
+    if (num > 2) {
+        maxPrime = num;
+    }
+
+    printf("The largest prime factor is: %lld\n", maxPrime);
+    return 0;
+}
