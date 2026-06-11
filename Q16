@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int low, high, remainder, n, temp, originalNum;
+    double sum;
+
+    printf("Enter interval bounds (lowest and highest numbers): ");
+    scanf("%d %d", &low, &high);
+
+    printf("Armstrong numbers between %d and %d are: \n", low, high);
+
+    for (int i = low; i <= high; ++i) {
+        // Count number of digits
+        temp = i;
+        n = 0;
+        while (temp != 0) {
+            temp /= 10;
+            ++n;
+        }
+
+        // Calculate power sum
+        temp = i;
+        sum = 0;
+        while (temp != 0) {
+            remainder = temp % 10;
+            sum += round(pow(remainder, n));
+            temp /= 10;
+        }
+
+        if ((int)sum == i) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+    return 0;
+}
