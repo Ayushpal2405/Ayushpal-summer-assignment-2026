@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+long long recursiveFactorial(int n) {
+    if (n <= 1) 
+        return 1; // Base case
+    return n * recursiveFactorial(n - 1); // Recursive case
+}
+
+int main() {
+    int num;
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num < 0) {
+        printf("Factorial of negative numbers doesn't exist.\n");
+    } else {
+        printf("Factorial of %d (using recursion) is: %lld\n", num, recursiveFactorial(num));
+    }
+    return 0;
+}
