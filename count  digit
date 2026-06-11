@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main() {
+    long long num;
+    int count = 0;
+
+    // Prompt user for input
+    printf("Enter an integer: ");
+    scanf("%lld", &num);
+
+    // Save the original number for the final print statement
+    long long originalNum = num;
+
+    // Use a do-while loop so it runs at least once (handles the number 0 correctly)
+    do {
+        count++;        // Increment digit counter
+        num /= 10;      // Remove the last digit
+    } while (num != 0);
+
+    printf("The number of digits in %lld is: %d\n", originalNum, count);
+
+    return 0;
+}
