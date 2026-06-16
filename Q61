@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int findMissingNumber(int arr[], int n) {
+    // Total numbers expected is n + 1 (since 1 element is missing)
+    int total_elements = n + 1;
+    int expectedSum = (total_elements * (total_elements + 1)) / 2;
+    int actualSum = 0;
+
+    for (int i = 0; i < n; i++) {
+        actualSum += arr[i];
+    }
+
+    return expectedSum - actualSum;
+}
+
+int main() {
+    int arr[] = {1, 2, 4, 5, 6}; // 3 is missing
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    int missing = findMissingNumber(arr, n);
+    printf("The missing number is: %d\n", missing);
+    
+    return 0;
+}
