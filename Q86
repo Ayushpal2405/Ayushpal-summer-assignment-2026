@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+int main() {
+    char str[200];
+    int i = 0, words = 0;
+
+    printf("Enter a sentence: ");
+    gets(str); // Reads spaces as well
+
+    while (str[i] != '\0') {
+        // If current character is a space and next is not a space/null
+        if ((i == 0 && str[i] != ' ') || (str[i] != ' ' && str[i - 1] == ' ')) {
+            words++;
+        }
+        i++;
+    }
+
+    printf("Total number of words: %d\n", words);
+    return 0;
+}
