@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+
+void findCommonChars(char str1[], char str2[]) {
+    int count1[256] = {0};
+    int count2[256] = {0};
+
+    // Count frequencies for the first string
+    for (int i = 0; str1[i] != '\0'; i++) {
+        count1[(unsigned char)str1[i]]++;
+    }
+
+    // Count frequencies for the second string
+    for (int i = 0; str2[i] != '\0'; i++) {
+        count2[(unsigned char)str2[i]]++;
+    }
+
+    printf("Common characters: ");
+    int found = 0;
+    for (int i = 0; i < 256; i++) {
+        if (count1[i] > 0 && count2[i] > 0) {
+            // Print character (ignoring spaces for cleaner output)
+            if (i != ' ') {
+                printf("'%c' ", i);
+                found = 1;
+            }
+        }
+    }
+    if (!found) {
+        printf("None");
+    }
+    printf("\n");
+}
+
+int main() {
+    char str1[] = { "programming" };
+    char str2[] = { "gaming" };
+
+    printf("String 1: %s\n", str1);
+    printf("String 2: %s\n", str2);
+    
+    findCommonChars(str1, str2);
+
+    return 0;
+}
