@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Book {
+    int id;
+    char title[50];
+    char author[50];
+    int isIssued;
+};
+
+int main() {
+    struct Book library[2] = {
+        {101, "The C Programming Language", "K&R", 0},
+        {102, "Clean Code", "Robert Martin", 0}
+    };
+    int choice, bookId;
+
+    while(1) {
+        printf("\n--- Library System ---\n1. List Books\n2. Issue Book\n3. Exit\nChoice: ");
+        scanf("%d", &choice);
+        if(choice == 3) break;
+
+        if(choice == 1) {
+            for(int i=0; i<2; i++) {
+                printf("ID: %d | Title: %s | Status: %s\n", library[i].id, library[i].title, library[i].isIssued ? "Issued" : "Available");
+            }
+        } else if(choice == 2) {
+            printf("Enter Book ID to issue: ");
+            scanf("%d", &bookId);
+            int found = 0;
+            for(int i=0; i<2; i++) {
+                if(library[i].id == bookId) {
+                    found = 1;
+                    if(library[i].isIssued) printf("Already issued!\n");
+                    else { library[i].isIssued = 1; printf("Book issued successfully!\n"); }
+                }
+            }
+            if(!found) printf("Book not found.\n");
+        }
+    }
+    return 0;
+}
