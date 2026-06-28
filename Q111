@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main() {
+    int totalSeats = 10;
+    int requested;
+    char choice;
+
+    while(1) {
+        printf("\n=== Theatre Ticket Booking ===\n");
+        printf("Available Seats: %d\n", totalSeats);
+        printf("Do you want to book tickets? (Y/N): ");
+        scanf(" %c", &choice);
+
+        if (choice != 'Y' && choice != 'y') {
+            printf("Exiting System.\n");
+            break;
+        }
+
+        printf("Enter number of seats to book: ");
+        scanf("%d", &requested);
+
+        if (requested <= 0) {
+            printf("Invalid ticket count!\n");
+        } else if (requested <= totalSeats) {
+            totalSeats -= requested;
+            printf("Successfully booked %d tickets!\n", requested);
+        } else {
+            printf("Sorry, insufficient seats available.\n");
+        }
+    }
+    return 0;
+}
