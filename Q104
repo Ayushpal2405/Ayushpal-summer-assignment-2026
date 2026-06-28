@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+    char ans;
+    int score = 0;
+
+    printf("=== Quick Trivia Quiz ===\n\n");
+
+    // Question 1
+    printf("Q1. What is the size of an 'int' data type in C on most 32/64 bit systems?\n");
+    printf("A) 1 Byte  B) 2 Bytes  C) 4 Bytes  D) 8 Bytes\n");
+    printf("Your Answer: ");
+    scanf(" %c", &ans);
+    if (ans == 'C' || ans == 'c') { printf("Correct!\n\n"); score++; }
+    else printf("Wrong! Correct answer is C.\n\n");
+
+    // Question 2
+    printf("Q2. Which keyword is used to prevent any changes to a variable?\n");
+    printf("A) volatile  B) static  C) immutable  D) const\n");
+    printf("Your Answer: ");
+    scanf(" %c", &ans);
+    if (ans == 'D' || ans == 'd') { printf("Correct!\n\n"); score++; }
+    else printf("Wrong! Correct answer is D.\n\n");
+
+    printf("=== Quiz Complete ===\n");
+    printf("Your Final Score: %d / 2\n", score);
+
+    return 0;
+}
