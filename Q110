@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+struct Account {
+    int accNum;
+    char holder[50];
+    double balance;
+};
+
+int main() {
+    struct Account acc1 = {1001, "Alice", 2500.0};
+    struct Account acc2 = {1002, "Bob", 1200.0};
+    double transferAmt;
+
+    printf("Account 1: %s Balance: $%.2f\n", acc1.holder, acc1.balance);
+    printf("Account 2: %s Balance: $%.2f\n", acc2.holder, acc2.balance);
+
+    printf("\nEnter amount to transfer from %s to %s: ", acc1.holder, acc2.holder);
+    scanf("%lf", &transferAmt);
+
+    if (transferAmt > 0 && acc1.balance >= transferAmt) {
+        acc1.balance -= transferAmt;
+        acc2.balance += transferAmt;
+        printf("\nTransfer Successful!\n");
+        printf("%s New Balance: $%.2f\n", acc1.holder, acc1.balance);
+        printf("%s New Balance: $%.2f\n", acc2.holder, acc2.balance);
+    } else {
+        printf("\nTransfer Failed! Insufficient balance or invalid amount.\n");
+    }
+    return 0;
+}
