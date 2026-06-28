@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+struct Contact {
+    char name[40];
+    char phone[15];
+};
+
+int main() {
+    int count;
+    printf("How many contacts to save?: ");
+    scanf("%d", &count);
+    struct Contact directory[count];
+
+    for(int i = 0; i < count; i++) {
+        printf("Enter Name %d: ", i + 1);
+        scanf("%s", directory[i].name);
+        printf("Enter Phone %d: ", i + 1);
+        scanf("%s", directory[i].phone);
+    }
+
+    printf("\n=== Saved Contacts Contact Book ===\n");
+    for(int i = 0; i < count; i++) {
+        printf("Contact %d: %s -> %s\n", i + 1, directory[i].name, directory[i].phone);
+    }
+    return 0;
+}
