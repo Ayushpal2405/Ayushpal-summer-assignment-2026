@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+struct Marksheet {
+    char studentName[50];
+    int rollNo;
+    float math;
+    float science;
+    float english;
+};
+
+int main() {
+    struct Marksheet entry;
+    float total, percentage;
+
+    printf("=== Academic Marksheet Generator ===\n");
+    printf("Enter Student Name: ");
+    scanf("%s", entry.studentName);
+    printf("Enter Roll Number: ");
+    scanf("%d", &entry.rollNo);
+
+    printf("Enter Marks for Mathematics (out of 100): ");
+    scanf("%f", &entry.math);
+    printf("Enter Marks for Science (out of 100): ");
+    scanf("%f", &entry.science);
+    printf("Enter Marks for English (out of 100): ");
+    scanf("%f", &entry.english);
+
+    // Calculating Metrics
+    total = entry.math + entry.science + entry.english;
+    percentage = total / 3.0;
+
+    // Display Output Formatted Report card
+    printf("\n========================================\n");
+    printf("               MARKSHEET                \n");
+    printf("========================================\n");
+    printf("Student Name : %s\n", entry.studentName);
+    printf("Roll Number  : %d\n", entry.rollNo);
+    printf("----------------------------------------\n");
+    printf("Subject          | Max Marks | Obtained \n");
+    printf("----------------------------------------\n");
+    printf("Mathematics      |    100    |   %.1f\n", entry.math);
+    printf("Science          |    100    |   %.1f\n", entry.science);
+    printf("English          |    100    |   %.1f\n", entry.english);
+    printf("----------------------------------------\n");
+    printf("Total Score      : %.1f / 300\n", total);
+    printf("Aggregate Percent: %.2f%%\n", percentage);
+    
+    // Grading Criteria
+    if (percentage >= 85.0) {
+        printf("Final Grade      : Distinction (A+)\n");
+    } else if (percentage >= 60.0) {
+        printf("Final Grade      : First Class (A)\n");
+    } else if (percentage >= 40.0) {
+        printf("Final Grade      : Pass (B)\n");
+    } else {
+        printf("Final Grade      : Fail (F)\n");
+    }
+    printf("========================================\n");
+
+    return 0;
+}
