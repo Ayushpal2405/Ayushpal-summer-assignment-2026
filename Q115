@@ -1,0 +1,78 @@
+#include <stdio.h>
+
+int getStringLength(char str[]) {
+    int len = 0;
+    while (str[len] != '\0') {
+        len++;
+    }
+    return len;
+}
+
+int main() {
+    int choice;
+    char str1[200], str2[100];
+
+    while(1) {
+        printf("\n--- STRING OPERATIONS SYSTEM ---\n");
+        printf("1. Find String Length\n");
+        printf("2. Reverse String\n");
+        printf("3. Concatenate Two Strings\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        getchar(); // Clear newline character from buffer
+
+        if (choice == 4) {
+            printf("Exiting program.\n");
+            break;
+        }
+
+        switch(choice) {
+            case 1:
+                printf("Enter a string: ");
+                fgets(str1, sizeof(str1), stdin);
+                // Remove trailing newline if present
+                for(int i=0; str1[i]!='\0'; i++) if(str1[i]=='\n') str1[i]='\0';
+                
+                printf("Length of string: %d\n", getStringLength(str1));
+                break;
+
+            case 2:
+                printf("Enter a string to reverse: ");
+                fgets(str1, sizeof(str1), stdin);
+                for(int i=0; str1[i]!='\0'; i++) if(str1[i]=='\n') str1[i]='\0';
+                
+                int len = getStringLength(str1);
+                printf("Reversed string: ");
+                for (int i = len - 1; i >= 0; i--) {
+                    putchar(str1[i]);
+                }
+                printf("\n");
+                break;
+
+            case 3:
+                printf("Enter first string: ");
+                fgets(str1, sizeof(str1), stdin);
+                for(int i=0; str1[i]!='\0'; i++) if(str1[i]=='\n') str1[i]='\0';
+
+                printf("Enter second string to append: ");
+                fgets(str2, sizeof(str2), stdin);
+                for(int i=0; str2[i]!='\0'; i++) if(str2[i]=='\n') str2[i]='\0';
+
+                int len1 = getStringLength(str1);
+                int j = 0;
+                while (str2[j] != '\0') {
+                    str1[len1 + j] = str2[j];
+                    j++;
+                }
+                str1[len1 + j] = '\0'; // Null-terminate result
+
+                printf("Concatenated string: %s\n", str1);
+                break;
+
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+    return 0;
+}
