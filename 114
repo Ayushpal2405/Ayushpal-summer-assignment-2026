@@ -1,0 +1,98 @@
+#include <stdio.h>
+#define MAX 100
+
+void display(int arr[], int n) {
+    if (n == 0) {
+        printf("Array is empty.\n");
+        return;
+    }
+    printf("Array elements: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[MAX], n = 0, choice, element, pos;
+
+    while(1) {
+        printf("\n--- ARRAY OPERATIONS SYSTEM ---\n");
+        printf("1. Input/Initialize Array\n");
+        printf("2. Display Array\n");
+        printf("3. Insert Element\n");
+        printf("4. Delete Element\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice) {
+            case 1:
+                printf("Enter number of elements to initialize (Max %d): ", MAX);
+                scanf("%d", &n);
+                if(n > MAX || n < 0) {
+                    printf("Invalid size!\n");
+                    n = 0;
+                } else {
+                    printf("Enter %d elements: ", n);
+                    for (int i = 0; i < n; i++) {
+                        scanf("%d", &arr[i]);
+                    }
+                }
+                break;
+
+            case 2:
+                display(arr, n);
+                break;
+
+            case 3:
+                if (n >= MAX) {
+                    printf("Array Overflow! Cannot insert more elements.\n");
+                } else {
+                    printf("Enter element to insert: ");
+                    scanf("%d", &element);
+                    printf("Enter position (0 to %d): ", n);
+                    scanf("%d", &pos);
+
+                    if (pos < 0 || pos > n) {
+                        printf("Invalid position!\n");
+                    } else {
+                        for (int i = n; i > pos; i--) {
+                            arr[i] = arr[i - 1];
+                        }
+                        arr[pos] = element;
+                        n++;
+                        printf("Element inserted successfully.\n");
+                    }
+                }
+                break;
+
+            case 4:
+                if (n == 0) {
+                    printf("Array Underflow! Nothing to delete.\n");
+                } else {
+                    printf("Enter position to delete (0 to %d): ", n - 1);
+                    scanf("%d", &pos);
+
+                    if (pos < 0 || pos >= n) {
+                        printf("Invalid position!\n");
+                    } else {
+                        element = arr[pos];
+                        for (int i = pos; i < n - 1; i++) {
+                            arr[i] = arr[i + 1];
+                        }
+                        n--;
+                        printf("Deleted element: %d\n", element);
+                    }
+                }
+                break;
+
+            case 5:
+                printf("Exiting program.\n");
+                return 0;
+
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+}
