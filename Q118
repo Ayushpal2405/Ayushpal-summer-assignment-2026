@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_BOOKS 50
+#define STR_LEN 100
+
+int book_ids[MAX_BOOKS];
+char book_titles[MAX_BOOKS][STR_LEN];
+char book_authors[MAX_BOOKS][STR_LEN];
+int is_issued[MAX_BOOKS]; // 0 = Available, 1 = Issued
+int book_count = 0;
+
+void addBook() {
+    if (book_count >= MAX_BOOKS) {
+        printf("\nLibrary is full!\n");
+        return;
+    }
+    printf("\nEnter Book ID: ");
+    scanf("%d", &book_ids[book_count]);
+    getchar();
+    
+    printf("Enter Book Title: ");
+    fgets(book_titles[book_count], STR_LEN, stdin);
+    book_titles[book_count][strcspn(book_titles[book_count], "\n")] = 0;
+    
+    printf("Enter Author Name: ");
+    fgets(book_authors[book_count], STR_LEN, stdin);
+    book_authors[book_count][strcspn(book_authors[book_count], "\n")] = 0;
+    
+    is_issued[book_count] = 0; // Default: Available
+    book_count++;
+    printf("Book added successfully!\n");
+}
+
+void viewBooks() {
+    if (book_count == 0) {
+        printf("\nNo books in library catalog.\n");
+        return;
+    }
+    printf("\n--- Library Catalog ---\n");
+    printf("%-10s %-25s %-20s %-12s\n", "Book ID", "Title", "Author", "Status");
+    for (int i = 0; i < book_count; i++) {
+        printf("%-10d %-25s %-20s %-12s\n", book_ids[i], book_titles[i], book_authors[i], 
+               is_issued[i] ? "Issued" : "Available");
+    }
+}
+
+void toggleIssueStatus(int issue_mode) {
+    int id, found = 0;
+    printf("\nEnter Book ID: ");
+    scanf("%d", &id);
+    
+    for (int i = 0; i < book_count; i++) {
+        if (book_ids[i] == id) {
+            found = 1;
+            if (issue_mode == 1) { // Issuing
+                if (is_issued[i] == 1) printf("Book is already checked out!\n");
+                else { is_issued[i] = 1; printf("Book issued successfully!\n"); }
+            } else { // Returning
+                if (is_issued[i] == 0) printf("Book was not checked out!\n");
+                else { is_issued[i] = 0; printf("Book returned successfully!\n"); }
+            }
+            break;
+        }
+    }
+    if (!found) printf("Book ID not found.\n");
+}
+
+int main() {
+    int choice;
+    do {
+        printf("\n=== Mini Library System ===");
+        printf("\n1. Add New Book");
+        printf("\n2. View Catalog");
+        printf("\n3. Issue a Book");
+        printf("\n4. Return a Book");
+        printf("\n5. Exit");
+        printf("\nEnter option: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1: addBook(); break;
+            case 2: viewBooks(); break;
+            case 3: toggleIssueStatus(1); break;
+            case 4: toggleIssueStatus(0); break;
+            case 5: printf("Exiting library catalog system...\n"); break;
+            default: printf("Invalid choice!\n");
+        }
+    } while (choice != 5);
+    
+    return 0;
+}
