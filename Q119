@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_EMP 30
+
+int emp_ids[MAX_EMP];
+char emp_names[MAX_EMP][50];
+char designations[MAX_EMP][50];
+double salaries[MAX_EMP];
+int emp_count = 0;
+
+void registerEmployee() {
+    if (emp_count >= MAX_EMP) {
+        printf("\nMaximum workforce size reached.\n");
+        return;
+    }
+    printf("\nEnter Employee ID: ");
+    scanf("%d", &emp_ids[emp_count]);
+    getchar();
+    
+    printf("Enter Full Name: ");
+    fgets(emp_names[emp_count], 50, stdin);
+    emp_names[emp_count][strcspn(emp_names[emp_count], "\n")] = 0;
+    
+    printf("Enter Designation: ");
+    fgets(designations[emp_count], 50, stdin);
+    designations[emp_count][strcspn(designations[emp_count], "\n")] = 0;
+    
+    printf("Enter Monthly Base Salary: ");
+    scanf("%lf", &salaries[emp_count]);
+    
+    emp_count++;
+    printf("Employee profile stored successfully!\n");
+}
+
+void displayStaff() {
+    if (emp_count == 0) {
+        printf("\nNo active employees recorded.\n");
+        return;
+    }
+    printf("\n--- Workforce Register ---\n");
+    printf("%-8s %-20s %-15s %-12s\n", "Emp ID", "Name", "Designation", "Salary");
+    for (int i = 0; i < emp_count; i++) {
+        printf("%-8d %-20s %-15s $%-11.2f\n", emp_ids[i], emp_names[i], designations[i], salaries[i]);
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        printf("\n=== Mini Employee Management System ===");
+        printf("\n1. Register New Employee");
+        printf("\n2. Display All Employee Profiles");
+        printf("\n3. Exit");
+        printf("\nEnter Selection: ");
+        scanf("%d", &choice);
+        
+        switch (choice) {
+            case 1: registerEmployee(); break;
+            case 2: displayStaff(); break;
+            case 3: printf("Closing system portal...\n"); break;
+            default: printf("Option not found.\n");
+        }
+    } while (choice != 3);
+    
+    return 0;
+}
